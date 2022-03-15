@@ -1,45 +1,75 @@
 #include "main.h"
 /**
- * _printf - is a function that selects the correct function to print.
- * @format: identifier to look for.
- * Return: the length of the string.
- */
-int _printf(const char * const format, ...)
+ * opFunction - Second function for _printf
+ * @cont: Contador
+ * @list: Lista arguments
+ * @tipos: Tipos que nos trae el JSON
+ * @format: Formato
+ * Return: Len
+*/
+int opFunction(int cont, va_list list, typedate tipos[], const char *format)
 {
-	convert_match m[] = {
-		{"%s", printf_string}, {"%c", printf_char},
-		{"%%", printf_37},
-		{"%i", printf_int}, {"%d", printf_dec}, {"%r", printf_srev},
-		{"%R", printf_rot13}, {"%b", printf_bin}, {"%u", printf_unsigned},
-		{"%o", printf_oct}, {"%x", printf_hex}, {"%X", printf_HEX},
-		{"%S", printf_exclusive_string}, {"%p", printf_pointer}
-	};
-
-	va_list args;
-	int i = 0, j, len = 0;
-
-	va_start(args, format);
-	if (format == NULL || (format[0] == '%' && format[1] == '\0'))
-		return (-1);
-
-Here:
-	while (format[i] != '\0')
+int i = 0, j = 0, band = 0, spaces = 0;
+while (format && format[i])
+{
+	band = 0;
+	if (format[i] == '%' && format[i + 1] == '\0')
+	return (-1);
+	else if (format[i] == '%' && format[i + 1] != '%')
 	{
-		j = 13;
-		while (j >= 0)
+		for (j = 0; j < 7; j++)
 		{
-			if (m[j].id[0] == format[i] && m[j].id[1] == format[i + 1])
+			if (format[i] == '%' && format[i + spaces + 1] == tipos[j].typec)
 			{
-				len += m[j].f(args);
-				i = i + 2;
-				goto Here;
+				cont += tipos[j].fun(list);
+				i += spaces + 1;
+				band = 1;
 			}
-			j--;
 		}
-		_putchar(format[i]);
-		len++;
-		i++;
+		if (band == 0 && format[i + 2] != '\n')
+		{
+			_putchar(format[i]);
+			cont++;
+
+		}
+		else if (band == 0 && format[i + 2] == '\n')
+		{
+			_putchar(format[i]);
+			cont++;
+		}
 	}
-	va_end(args);
-	return (len);
+	else if (format[i] == '%' && format[i + 1] == '%')
+	{
+		i += _putchar('%');
+		cont += 1;
+	}
+	else
+		cont += _putchar(format[i]);
+	i++;
+}
+	return (cont);
+}
+/**
+ * _printf - Printf!!
+ * @format: Format
+ * Return: len
+ */
+int _printf(const char *format, ...)
+{
+typedate tipos[] = {
+	{'s', printString}, {'c', printChar}, {'i', printInteger},
+	{'d', printDecimal}, {'b', printBinary}, {'o', printOctal},
+	{'u', printUnsigned}
+};
+va_list list;
+int cont = -1;
+
+if (format != NULL)
+{
+va_start(list, format);
+cont = 0;
+cont = opFunction(cont, list, tipos, format);
+va_end(list);
+}
+return (cont);
 }

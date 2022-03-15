@@ -1,117 +1,89 @@
-. \ "This is the Holberton student manual page
-. \ "Just because it's printed doesn't mean it's the gospel
-.TH man 3 "15 March 2022" "Holberton School 0x11. C - _printf"
+.\" _printf man page /usr/share/man/man3/printf.3
+.\"
+.TH _PRINTF 3 "15-03-2022" "1.0" "Holberton School 0x11. C _printf"
 
 .SH NAME
-_printf (): Take the input to make formatted prints.
+_printf
+
+.B_printf - format and print data. Part of a project at Holberton School 0x11. C - _printf.
 
 .SH SYNOPSIS
-#include "main.h"
+Part of a project at Holberton School 0x11. C - _printf.
+This project mimics the printf found in in C.
 
-.SH Syntax
-int _printf (const char * format, ...)
+_printf FORMAT [ARGUMENT]...
+.ss
 
 .SH DESCRIPTION
-The _printf () function takes one argument: a string of characters to print.
-This string is made up of characters, each of which is printed exactly as it appears.
-On the other hand, we have characters that normally print as expected, but when you add a specifier, they become special.
-The format specifiers are:
-FORMAT generates a specific format relative to the input of the specifier.
 
-.SH Return value
-The _printf () function returns the number of characters printed (excluding the null byte used to finalize the output to strings).
+_printf() the function produces output according to format string that \
+specifies how subsequent arguments are written and converted to stdout, the \
+standard output stream.
 
-.B %c
-Print a character passed as a parameter.
+_printf() will loop through the format for a conversion specifier (%). If found\
+, it will access an array of structures and match the corresponding character \
+with the given function. The specified function will return a string-converted \
+version of the result and immediately passed into the buffer.
 
-.B %s
-Prints a string of characters terminated with a null.
+.SH CONVERSION SPECIFIERS
 
-.B %S
-Prints a string of characters and the number in hexadecimal of a special character that is written like this '\ x' according to the ASCII table.
+.IP %s
+prints a string.
+.IP %c
+prints a character.
+.IP %d
+prints an integer. Same as %i.
+.IP %i
+See %d.
+.IP %u
+Prints unsigned int.
+.IP %o
+Converts unsigned int to octal.
+.IP %x
+Converts unsigned int to hexadecimal (lowercase)
+.IP %X
+Converts unsigned int to hexadecimal (uppercase)
+.IP %r
+Prints reverse of intput string
+.IP %R
+Converts string to ROT 13.
 
-.B %%
-Print a percentage sign.
+.SH OPTIONS
 
-.B %d
-Prints a signed decimal number.
+Pending
 
-.B %i
-Converts an argument to unsigned decimal notation and prints it.
+.SH FORMAT
+controls the output as in C printf.  Interpreted sequences are:
 
-.B %b
-Converts the unsigned integer to binary and prints it.
+       \n     new line
 
-.B %u
-Prints an unsigned decimal number.
+       \t     tab
 
-.B %o
-Prints the octal unsigned integer conversion.
+       %%     a single %
 
-.B %x
-Unsigned hex conversion to lowercase.
-
-.B %X
-Unsigned hex conversion to uppercase.
-
-.B %p
-Print a memory address (pointer).
-
-.B %h
-Print the inverted string.
-
-.B %r
-Print the inverted string.
-
-.B %R
-replaces a letter with the thirteenth letter of the alphabet (ROT13).
-
-.SH Flag char
-.B +
-Print the '+' symbol in front of the positive number occupying one space wide.
-
-.B Space
-Invisible plus sign. A blank space is left before the number occupying a space in the width.
-
-.B #
-Prepend a print of a zero '0' over an octal number.
-
-.B 0
-Fill in zero to the left.
-
-.B -
-Justify left.
-
-.SH EXAMPLE
-
+.SS Example
 .RS
-#include "main.h"
+_printf("Hello %s", "world");
+Prints string "Hello world"
 
-int main (empty)
-{
-
-   _printf ("% s", String);
-
-   _printf ("I am a character% s", 'A');
-
-   _printf ("I am an integer% s", 12);
-
-   _printf ("I am percentage %%",%);
-
-   _printf ("I am a binary% b", 98);
-
-   _printf ("The number is:% 05d", 1560);
-
-    return (0);
-}
+_printf("They call me mad, but one day when history of France is written, they \
+will mark my name well ...%s ", "Sidney Applebaum")
 
 .RE
 
-.SH SEE ALSO
-printf (3)
+.SS Return Value
+Upon success, these main function will return the number of characters printed.
 
-.SH ERRORS
-No known bugs.
+.SH "SEE ALSO"
+.SH ""
 
-.SH AUTHOR
+.BR printf(1)
+
+.P
+
+.SH BUGS
+Memory issues are known to frequent this function. User beware.
+
+.SH "AUTHOR"
+
 Mozamane Baloyi and Eugene Madzaga

@@ -1,53 +1,36 @@
-#ifndef MAIN_H
-#define MAIN_H
+#ifndef header_file
+#define header_file
 
-#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
 #include <stdarg.h>
+#include <stdlib.h>
 /**
- * struct flags - struct containing flags to "turn on"
- * when a flag specifier is passed to _printf()
- * @plus: flag for the '+' character
- * @space: flag for the ' ' character
- * @hash: flag for the '#' character
+ * struct typeprint - create libraries
+ * @typec: char
+ * @fun: point void of lista
+ * Description: struct
  */
-typedef struct flags
+typedef struct typeprint
 {
-	int plus;
-	int space;
-	int hash;
-} flags_t;
-
-/**
- * struct printHandler - struct to choose the right function depending
- * on the format specifier passed to _printf()
- * @c: format specifier
- * @f: pointer to the correct printing function
- */
-typedef struct printHandler
-{
-	char c;
-	int (*f)(va_list ap, flags_t *f);
-} ph;
-int print_int(va_list l, flags_t *f);
-void print_number(int n);
-int print_unsigned(va_list l, flags_t *f);
-int count_digit(int i);
-int print_hex(va_list l, flags_t *f);
-int print_hex_big(va_list l, flags_t *f);
-int print_binary(va_list l, flags_t *f);
-int print_octal(va_list l, flags_t *f);
-char *convert(unsigned long int num, int base, int lowercase);
-int _printf(const char *format, ...);
-int (*get_print(char s))(va_list, flags_t *);
-int get_flag(char s, flags_t *f);
-int print_string(va_list l, flags_t *f);
-int print_char(va_list l, flags_t *f);
+	char typec;
+	int (*fun)(va_list lista);
+} typedate;
+/*Second function for _printf */
+int opFunction(int cont, va_list list, typedate tipos[],
+const char *format);
+int printUnk(int i, int spaces, const char *format, int band);
+int _strcmp(char *s1, char *s2);
 int _putchar(char c);
-int _puts(char *str);
-int print_rot13(va_list l, flags_t *f);
-int print_rev(va_list l, flags_t *f);
-int print_bigS(va_list l, flags_t *f);
-int print_address(va_list l, flags_t *f);
-int print_percent(va_list l, flags_t *f);
-#endif
-
+int _printf(const char *format, ...);
+int printString(va_list lista);
+int printChar(va_list lista);
+int printDecimal(va_list lista);
+int printInteger(va_list lista);
+int printBinary(va_list lista);
+int printUnsigned(va_list lista);
+int printUnsignedDigit(unsigned int num, int *cont);
+int printOctal(va_list lista);
+int printDigitOctal(unsigned int num, int *cont);
+char *_littleBuffer(int size);
+#endif /* Libraries Printf Giovanni and Lina */

@@ -1,10 +1,11 @@
-#ifndef header_file
-#define header_file
+#ifndef MAIN_H
+#define MAIN_H
 
 #include <unistd.h>
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdlib.h>
+#include <stddef.h>
 /**
  * struct typeprint - create libraries
  * @typec: char
@@ -33,4 +34,5 @@ int printUnsignedDigit(unsigned int num, int *cont);
 int printOctal(va_list lista);
 int printDigitOctal(unsigned int num, int *cont);
 char *_littleBuffer(int size);
-#endif /* Libraries Printf Giovanni and Lina */
+
+#endif /* Libraries Printf Mozamane and Eugene */
